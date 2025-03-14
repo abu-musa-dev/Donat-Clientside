@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { auth } from "../../firebase";  // Ensure Firebase auth is properly imported
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";  
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { Toaster, toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../Footer/Footer";
 
@@ -13,92 +12,84 @@ const Login = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  // Handle Login with Email & Password
   const handleLogin = async (e) => {
     e.preventDefault();
-
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
+      await signInWithEmailAndPassword(auth, email, password);
       toast.success("Login Successful!");
-      navigate("/home");  // Navigate to home page after successful login
+      navigate("/home");
     } catch (error) {
-      setError(error.message);  // Set the error message to state
+      setError(error.message);
       toast.error("Login failed! Please check your credentials.");
     }
   };
 
-  // Handle Login with Google
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
     try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
+      await signInWithPopup(auth, provider);
       toast.success("Google Login Successful!");
-      navigate("/home");  // Navigate to home page after successful Google login
+      navigate("/home");
     } catch (error) {
       toast.error("Google Login failed! Please try again.");
-      console.log(error.message);  // Log error for debugging
     }
   };
 
   return (
     <div>
-      <Navbar></Navbar>
-      <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 bg-white shadow-lg rounded-lg">
-        <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Login to Your Account</h1>
-        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
-        
-        <form onSubmit={handleLogin}>
-          <input
-            type="email"
-            className="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            className="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <p className="text-right text-sm text-blue-600 hover:underline cursor-pointer">
-            <a href="/forgot-password">Forgot Password?</a>
+      <Navbar />
+      <div className="flex justify-center items-center min-h-screen bg-white">
+        <div className="w-full max-w-md p-8 bg-white shadow-lg rounded-lg">
+          <h1 className="text-2xl font-bold text-center text-green-800 mb-6">Login to Your Account</h1>
+          {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+
+          <form onSubmit={handleLogin} className="space-y-4">
+            <input
+              type="email"
+              className="w-full p-3 border border-green-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              className="w-full p-3 border border-green-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <p className="text-right text-sm text-green-600 hover:text-yellow-500 cursor-pointer">
+              <a href="/forgot-password">Forgot Password?</a>
+            </p>
+            <button
+              type="submit"
+              className="w-full py-3 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white font-bold rounded-md shadow-md hover:from-yellow-600 hover:to-yellow-700 transition duration-300"
+            >
+              Login
+            </button>
+          </form>
+
+          <p className="mt-4 text-center text-sm text-gray-600">
+            Don't have an account? <a href="/register" className="text-green-600 hover:text-yellow-500">Register</a>
           </p>
-          <button
-            type="submit"
-            className="w-full py-3 bg-blue-600 text-white font-bold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            Login
-          </button>
-        </form>
 
-        <p className="mt-4 text-center text-sm text-gray-600">
-          Don't have an account? <a href="/register" className="text-blue-600 hover:underline">Register</a>
-        </p>
+          <div className="mt-6 flex justify-center">
+            <button
+              onClick={handleGoogleLogin}
+              className="w-full py-3 bg-gradient-to-r from-green-500 to-green-600 text-white font-bold rounded-md shadow-md hover:from-green-600 hover:to-green-700 transition duration-300"
+            >
+              Login with Google
+            </button>
+          </div>
 
-        <div className="mt-6 flex justify-center">
-          <button
-            onClick={handleGoogleLogin}
-            className="w-full py-3 bg-red-500 text-white font-bold rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
-          >
-            Login with Google
-          </button>
+          <Toaster />
         </div>
-
-        <Toaster />
       </div>
-    </div>
-    <Footer></Footer>
+      <Footer />
     </div>
   );
 };
 
 export default Login;
-
-

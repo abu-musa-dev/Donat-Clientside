@@ -69,7 +69,7 @@ const Footer = () => {
         </div>
         
         {/* Copyright */}
-        <div className="mt-10 text-center text-gray-400 border-t border-gray-700 pt-6">
+        <div className="mt-10  text-center text-gray-400 border-t border-gray-700 pt-6">
           &copy; Copyright 2025 Donat. All Rights Reserved.
         </div>
       </div>

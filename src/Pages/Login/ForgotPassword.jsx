@@ -30,26 +30,29 @@ const ForgotPassword = () => {
 
   return (
     <div>
-      <Navbar></Navbar>
-      <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 bg-white shadow-lg rounded-lg">
-        <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Reset Password</h1>
-        <input
-          type="email"
-          className="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <button
-          onClick={handleResetPassword}
-          className="w-full py-3 bg-blue-600 text-white font-bold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          Send Reset Email
-        </button>
-        <Toaster />
+      <Navbar />
+      <div className="flex justify-center items-center min-h-screen bg-white">
+        <div className="w-full max-w-md p-8 bg-white shadow-lg rounded-lg">
+          <h1 className="text-2xl font-semibold text-center text-green-800 mb-6">Reset Password</h1>
+
+          <input
+            type="email"
+            className="w-full p-3 mb-4 border border-green-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
+          <button
+            onClick={handleResetPassword}
+            className="w-full py-3 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white font-bold rounded-md shadow-md hover:from-yellow-600 hover:to-yellow-700 transition duration-300"
+          >
+            Send Reset Email
+          </button>
+
+          <Toaster />
+        </div>
       </div>
-    </div>
     </div>
   );
 };

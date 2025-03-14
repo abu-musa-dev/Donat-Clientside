@@ -10,6 +10,7 @@ import Footer from "../Footer/Footer";
 import { Outlet } from "react-router-dom";
 import CharityServices from "../components/CharityServices/CharityServices";
 import CharityHero from "../components/CharityHero/CharityHero";
+import Stats from "../components/Stats/Stats";
 
 const Home = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -42,6 +43,7 @@ const Home = () => {
       {/* <DonationStats isDarkMode={isDarkMode} /> */}
       {/* <SuccessStories isDarkMode={isDarkMode} /> */}
       {/* <Ourmision /> */}
+      <Stats></Stats>
       <CharityHero></CharityHero>
       <CharityServices></CharityServices>
       <Outlet />
