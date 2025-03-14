@@ -53,11 +53,12 @@ const Register = () => {
 
   return (
     <div>
-      <Navbar></Navbar>
+      <Navbar />
       <div className="flex justify-center items-center min-h-screen bg-gray-100">
         <div className="w-full max-w-md p-8 bg-white shadow-lg rounded-lg">
-          <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Create Account</h1>
+          <h1 className="text-2xl font-semibold text-center text-gray-800 mb-6">Create Account</h1>
           {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+          
           <input
             type="text"
             className="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -79,6 +80,7 @@ const Register = () => {
             value={photoURL}
             onChange={(e) => setPhotoURL(e.target.value)}
           />
+          
           <div className="relative">
             <input
               type={showPassword ? "text" : "password"}
@@ -137,19 +139,23 @@ const Register = () => {
               )}
             </button>
           </div>
+
           <button
             onClick={handleRegister}
             className="w-full py-3 bg-blue-600 text-white font-bold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             Register
           </button>
+          
           <p className="mt-4 text-center text-sm text-gray-600">
-            Already have an account? <a href="/login" className="text-blue-600 hover:underline">Login</a>
+            Already have an account?{" "}
+            <a href="/login" className="text-blue-600 hover:underline">Login</a>
           </p>
+
           <Toaster />
         </div>
       </div>
-      <Footer></Footer>
+      <Footer />
     </div>
   );
 };

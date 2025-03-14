@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from '../../firebase';
 import { Toaster, toast } from "react-hot-toast";
+import logo from '../../assets/logo.png'
 
 const Navbar = () => {
   const [user, setUser] = useState(null);
@@ -74,7 +75,7 @@ const Navbar = () => {
     <>
       <div className="navbar bg-base-300 relative z-20 p-5 sticky top-0">
         <div className="flex-1">
-          <button className="btn btn-ghost text-xl">DREEM-FOUND</button>
+          <button className="btn btn-ghost text-xl"> <img src={logo} alt="" /> </button>
         </div>
         <div className="flex-none hidden md:flex space-x-4">
           <Link to="/" className="btn btn-ghost">Home</Link>
