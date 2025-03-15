@@ -3,6 +3,7 @@ import Serviceimg from '../../assets/service-card-icon1-1.png';
 import Educationimg from '../../assets/service-card-icon1-2.png';
 import Medicineimg from '../../assets/service-card-icon1-3.png';
 import BgImage from '../../assets/bground.png';
+import { AiOutlineArrowRight } from "react-icons/ai"
 
 const services = [
   {
@@ -36,7 +37,7 @@ const CharityServices = () => {
 
       <div className="relative z-10">
         <h3 className="text-yellow-500 text-lg font-semibold uppercase tracking-wide">
-         ---- Charity Services ----
+        <hr className="w-16 border-t-2 border-yellow-500 mx-4" />Charity Services<hr className="w-16 border-t-2 border-yellow-500 mx-4" />
         </h3>
         <h2 className="text-4xl font-bold text-gray-900 mt-2">
           We Do It For All People
@@ -73,7 +74,8 @@ const CharityServices = () => {
                 relative overflow-hidden hover:text-white hover:border-none
                 before:absolute before:inset-0 before:bg-gradient-to-r before:from-[rgba(22,163,74,0)] before:via-[rgba(22,163,74,0.7)] before:to-[rgba(22,163,74,0)] 
                 before:transition-all before:duration-500 before:scale-x-0 hover:before:scale-x-100">
-                Learn More <span className="text-sm transition-transform duration-300 group-hover:-rotate-90">→</span>
+                Learn More           <AiOutlineArrowRight className="inline-block transition-transform rotate-[-60deg] duration-300 transform ml-2 group-hover:rotate-0" /> {/* Arrow icon */}
+                
               </button>
             </div>
           ))}

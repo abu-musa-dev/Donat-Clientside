@@ -3,6 +3,7 @@ import Slider from "react-slick"; // Importing react-slick for the carousel
 import "tailwindcss/tailwind.css";
 import "slick-carousel/slick/slick.css"; // Import slick carousel css
 import "slick-carousel/slick/slick-theme.css"; // Import slick carousel theme
+import { AiOutlineArrowRight } from "react-icons/ai";
 
 import banner1 from "../../assets/banner1.jpg";
 import banner2 from "../../assets/banner2.jpg"; // Updated image for the second slide
@@ -59,7 +60,9 @@ const Banner = () => {
                 {/* Left side line */}
                 <hr className="w-16 border-t-2 border-yellow-500" />
                 {/* Text */}
-                <span className="text-lg text-yellow-500 font-italic sm:text-xl md:text-2xl">{slide.header}</span>
+                <span className="text-lg text-yellow-500 font-italic sm:text-xl md:text-2xl">
+                  {slide.header}
+                </span>
                 {/* Right side line */}
                 <hr className="w-16 border-t-2 border-yellow-500" />
               </div>
@@ -70,9 +73,11 @@ const Banner = () => {
             </div>
             {/* Call-to-action button at the bottom of the screen */}
             <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2">
-            <button className="bg-green-600 text-white px-6 py-3 rounded-full shadow-md hover:bg-green-700 transition-all">
-          Donate Now ↗
-        </button>
+              <button className="bg-[#1A685B] text-white px-6 py-3 rounded-full shadow-md hover:bg-green-700 transition-all">
+                Donate Now{" "}
+                <AiOutlineArrowRight className="inline-block transition-transform rotate-[-60deg] duration-300 transform ml-2 group-hover:rotate-0" />{" "}
+                {/* Arrow icon */}
+              </button>
             </div>
           </div>
         ))}

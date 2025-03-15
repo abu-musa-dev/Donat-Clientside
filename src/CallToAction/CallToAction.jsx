@@ -3,7 +3,7 @@ import { FaArrowRight } from "react-icons/fa";
 
 const CallToAction = () => {
   return (
-    <section className="bg-green-900 text-white text-center py-16 px-6">
+    <section className="bg-[#1A685B] text-white text-center py-16 px-6">
       <h2 className="text-4xl md:text-5xl font-bold leading-tight">
         Our Door Are Always Open <br />
         To More People Who Want <br />
