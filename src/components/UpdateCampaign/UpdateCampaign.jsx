@@ -74,7 +74,7 @@ const UpdateCampaign = () => {
     <div>
       <Navbar />
       <div className="max-w-5xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-6">
-        <h1 className="text-3xl font-semibold text-center text-gray-800 mb-6">Update Campaign</h1>
+        <h1 className="text-3xl font-semibold text-center text-[#1A685B] mb-6">Update Campaign</h1>
         <form onSubmit={handleSaveUpdate}>
           <input
             type="text"

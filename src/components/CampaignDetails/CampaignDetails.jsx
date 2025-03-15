@@ -1,41 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import Swal from "sweetalert2"; // Import SweetAlert2
+import Swal from "sweetalert2";
+import Navbar from "../Navbar/Navbar";
+import Footer from "../../Footer/Footer";
 
 const CampaignDetails = ({ refreshDonations }) => {
-  const { id } = useParams(); // Get the campaign ID from the URL
+  const { id } = useParams();
   const [campaign, setCampaign] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [donationAmount, setDonationAmount] = useState("");
 
-  // Fetch campaign details from the API
   useEffect(() => {
     const fetchCampaign = async () => {
       try {
         const response = await axios.get(
           `http://localhost:3001/api/campaigns/${id}`
         );
-
-        // Validate campaign deadline date
-        const campaignData = response.data;
-        if (isNaN(new Date(campaignData.deadline).getTime())) {
-          throw new Error("Invalid campaign deadline.");
-        }
-
-        setCampaign(campaignData);
+        setCampaign(response.data);
         setLoading(false);
       } catch (err) {
         setError("Failed to fetch campaign details.");
         setLoading(false);
       }
     };
-
     fetchCampaign();
   }, [id]);
 
-  // Handle donation submission
   const handleDonate = async () => {
     if (isNaN(parseFloat(donationAmount)) || donationAmount <= 0) {
       Swal.fire({
@@ -45,25 +37,19 @@ const CampaignDetails = ({ refreshDonations }) => {
       });
       return;
     }
-
     try {
-      // Post donation data to the API
       await axios.post("http://localhost:3001/api/donate", {
         campaignId: id,
         amount: parseFloat(donationAmount),
-        donorName: "John Doe", // Replace with authenticated user's name
-        donorEmail: "john.doe@example.com", // Replace with authenticated user's email
+        donorName: "John Doe",
+        donorEmail: "john.doe@example.com",
       });
-
       Swal.fire({
         icon: "success",
         title: "Thank You!",
         text: "Your donation has been successfully processed.",
       });
-
-      setDonationAmount(""); // Reset input field
-
-      // Refresh the donations list after a successful donation
+      setDonationAmount("");
       refreshDonations("john.doe@example.com");
     } catch (error) {
       Swal.fire({
@@ -74,7 +60,6 @@ const CampaignDetails = ({ refreshDonations }) => {
     }
   };
 
-  // Show loading state
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -83,7 +68,6 @@ const CampaignDetails = ({ refreshDonations }) => {
     );
   }
 
-  // Show error state
   if (error) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -92,28 +76,24 @@ const CampaignDetails = ({ refreshDonations }) => {
     );
   }
 
-  // Render campaign details and donation form
   return (
-    <div className="bg-[#F4F4F9] min-h-screen py-10">
+    <div className="bg-[#F4F4F9] h-50 py-10">
+      <Navbar></Navbar>
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
         <figure className="w-full">
           <img
             src={campaign.image}
             alt={campaign.title}
-            className="w-full h-64 object-cover"
+            className="w-full h-64 object-cover rounded-t-lg"
           />
         </figure>
         <div className="p-6">
           <h1 className="text-3xl font-semibold text-[#1A685B] mb-4">{campaign.title}</h1>
-          <p className="text-gray-700 text-lg mb-4">{campaign.description}</p>
-          <div className="text-lg mb-4">
-            <span className="font-bold text-[#1A685B]">Type:</span> {campaign.type}
-          </div>
-          <div className="text-lg mb-4">
-            <span className="font-bold text-[#1A685B]">Minimum Donation:</span> ${campaign.minimumDonation}
-          </div>
-          <div className="text-lg mb-4">
-            <span className="font-bold text-[#1A685B]">Deadline:</span> {new Date(campaign.deadline).toLocaleDateString()}
+          <p className="text-gray-700 text-sm mb-4 leading-relaxed">{campaign.description}</p>
+          <div className="text-lg mb-4 bg-gray-100 p-3 rounded-lg shadow-sm">
+            <span className="font-bold text-[#1A685B]">Type:</span> {campaign.type} | 
+            <span className="font-bold text-[#1A685B]"> Minimum Donation:</span> ${campaign.minimumDonation} | 
+            <span className="font-bold text-[#1A685B]"> Deadline:</span> {new Date(campaign.deadline).toLocaleDateString()}
           </div>
 
           <div className="form-control mb-6">
@@ -131,7 +111,7 @@ const CampaignDetails = ({ refreshDonations }) => {
 
           <div className="mt-6">
             <button
-              className="btn btn-primary w-full py-3 text-white bg-[#1A685B] hover:bg-[#145b4b] rounded-lg"
+              className="btn btn-primary w-full py-3 text-white bg-[#1A685B] hover:bg-[#145b4b] rounded-full transition-all duration-300 ease-in-out transform hover:scale-105"
               onClick={handleDonate}
             >
               Donate Now
@@ -139,6 +119,7 @@ const CampaignDetails = ({ refreshDonations }) => {
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 };

@@ -7,7 +7,7 @@ const FAQSection = () => {
   return (
     <div className="flex flex-col md:flex-row items-center bg-white p-8 md:p-16">
       {/* Left Side - Images */}
-      <div className="relative w-full md:w-1/2">
+      <div className="relative  md:w-1/2">
         <img
           src={img1}
           alt="Smiling Kids"

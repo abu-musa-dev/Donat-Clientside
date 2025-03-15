@@ -88,14 +88,18 @@ const AddNewCampaign = () => {
   };
 
   return (
-    <div className="">
+    <div className="bg-gray-100">
       <Navbar />
       <Toaster />
+      {/* ✅ **ব্যানার সেকশন (গ্রেডিয়েন্ট যোগ করা হয়েছে)** */}
       <div className="relative">
   <img
     src={img}
     alt="Campaign Banner"
     className="w-full h-64 object-cover"
+    style={{
+      backgroundImage: `linear-gradient(rgba(26, 104, 91, 0.8), rgba(26, 104, 91, 0.8)), url(${img})`,
+    }}
   />
   <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-[#092621] ">
     <h2 className="text-white text-3xl font-bold">

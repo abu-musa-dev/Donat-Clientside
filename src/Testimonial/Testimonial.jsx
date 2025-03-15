@@ -3,8 +3,6 @@ import { FaStar } from "react-icons/fa";
 import { FaQuoteRight } from "react-icons/fa";
 import img1 from '../assets/testmonial.png';
 import img2 from '../assets/testmonial2.png';
-import img3 from '../assets/testmonial.png';
-import img4 from '../assets/testmonial2.png';
 
 const testimonials = [
   {
@@ -13,7 +11,7 @@ const testimonials = [
     role: "CEO, Founder",
     rating: 5.0,
     text: `This charity truly changes lives. The support and transparency they offer are unmatched. I am proud to contribute and be a part of this mission.`,
-    image: img1,
+    image: img2,
   },
   {
     id: 2,
@@ -21,7 +19,7 @@ const testimonials = [
     role: "Marketing Manager",
     rating: 4.8,
     text: `A well-organized charity that actually delivers on its promises. Their events are impactful, and their initiatives are genuinely helping communities.`,
-    image: img2,
+    image: img1,
   },
   {
     id: 3,
@@ -29,7 +27,7 @@ const testimonials = [
     role: "Business Owner",
     rating: 5.0,
     text: `I have donated to many causes, but this organization stands out due to its commitment and integrity. Highly recommended for anyone looking to make a real difference!`,
-    image: img3,
+    image: img2,
   },
   {
     id: 4,
@@ -37,7 +35,7 @@ const testimonials = [
     role: "NGO Volunteer",
     rating: 4.9,
     text: `Volunteering here has been a life-changing experience. The team is dedicated, and the impact they create is inspiring.`,
-    image: img4,
+    image: img1,
   },
 ];
 
@@ -90,7 +88,7 @@ export default function Testimonial() {
       <div className="flex items-center justify-center mt-6 gap-4">
         <button
           onClick={prevTestimonial}
-          className="p-4 bg-gray-200 rounded-full hover:bg-yellow-500 transition duration-300"
+          className="p-4 bg-gray-200 rounded-full  transition duration-300"
         >
           ←
         </button>
@@ -98,7 +96,7 @@ export default function Testimonial() {
         <span className="text-gray-400">/ {testimonials.length}</span>
         <button
           onClick={nextTestimonial}
-          className="p-4 bg-gray-200 rounded-full hover:bg-yellow-500 transition duration-300"
+          className="p-4 bg-gray-200 rounded-full transition duration-300"
         >
           →
         </button>
