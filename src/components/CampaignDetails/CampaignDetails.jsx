@@ -94,9 +94,9 @@ const CampaignDetails = ({ refreshDonations }) => {
 
   // Render campaign details and donation form
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
-        <figure>
+    <div className="bg-[#F4F4F9] min-h-screen py-10">
+      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
+        <figure className="w-full">
           <img
             src={campaign.image}
             alt={campaign.title}
@@ -104,27 +104,25 @@ const CampaignDetails = ({ refreshDonations }) => {
           />
         </figure>
         <div className="p-6">
-          <h1 className="text-2xl font-bold mb-4">{campaign.title}</h1>
-          <p className="text-gray-700 mb-4">{campaign.description}</p>
-          <div className="mb-4">
-            <span className="font-bold">Type:</span> {campaign.type}
+          <h1 className="text-3xl font-semibold text-[#1A685B] mb-4">{campaign.title}</h1>
+          <p className="text-gray-700 text-lg mb-4">{campaign.description}</p>
+          <div className="text-lg mb-4">
+            <span className="font-bold text-[#1A685B]">Type:</span> {campaign.type}
           </div>
-          <div className="mb-4">
-            <span className="font-bold">Minimum Donation:</span> $
-            {campaign.minimumDonation}
+          <div className="text-lg mb-4">
+            <span className="font-bold text-[#1A685B]">Minimum Donation:</span> ${campaign.minimumDonation}
           </div>
-          <div className="mb-4">
-            <span className="font-bold">Deadline:</span>{" "}
-            {new Date(campaign.deadline).toLocaleDateString()}
+          <div className="text-lg mb-4">
+            <span className="font-bold text-[#1A685B]">Deadline:</span> {new Date(campaign.deadline).toLocaleDateString()}
           </div>
 
-          <div className="form-control">
+          <div className="form-control mb-6">
             <label className="label">
-              <span className="label-text">Enter Donation Amount:</span>
+              <span className="label-text text-lg font-semibold text-[#1A685B]">Enter Donation Amount:</span>
             </label>
             <input
               type="number"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full text-xl py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1A685B]"
               value={donationAmount}
               onChange={(e) => setDonationAmount(e.target.value)}
               placeholder={`Minimum $${campaign.minimumDonation}`}
@@ -132,14 +130,16 @@ const CampaignDetails = ({ refreshDonations }) => {
           </div>
 
           <div className="mt-6">
-            <button className="btn btn-primary w-full" onClick={handleDonate}>
+            <button
+              className="btn btn-primary w-full py-3 text-white bg-[#1A685B] hover:bg-[#145b4b] rounded-lg"
+              onClick={handleDonate}
+            >
               Donate Now
             </button>
           </div>
         </div>
       </div>
     </div>
-    
   );
 };
 

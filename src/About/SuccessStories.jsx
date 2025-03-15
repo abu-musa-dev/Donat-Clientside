@@ -1,62 +1,57 @@
-import React, { useEffect, useState } from "react";
-import { Typewriter } from 'react-simple-typewriter';  // Import Typewriter
+import React from "react";
+import img from "../assets/story_1_1.png"; // Add your custom styles if required
+import { FaArrowRight } from "react-icons/fa";
 
-const SuccessStories = ({ isDarkMode }) => {
-  const [textLength, setTextLength] = useState(0);
-
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", isDarkMode ? "dark" : "light");
-  }, [isDarkMode]);
-
-  const stories = [
-    {
-      name: "Ayesha Rahman",
-      story: "Thanks to Dream Donation, we received warm clothes and blankets, which helped us survive the harsh winter. Their support gave us hope for a better future.",
-      image: "https://i.ibb.co/L89BW3V/download-16.jpg",
-    },
-    {
-      name: "Kamrul Hasan",
-      story: "The food donations from Dream Donation made a huge difference in our lives. We are deeply grateful for the kindness and generosity that changed our lives.",
-      image: "https://i.ibb.co/VNNNkgH/download-17.jpg",
-    },
-  ];
-
-  useEffect(() => {
-    setTextLength(stories[0].story.length);
-  }, [stories]);
-
+const SuccessStories = () => {
   return (
-    <section className="py-16 px-4 text-center">
-      <h2 className="text-3xl font-extrabold mb-8" style={{ color: "var(--text-color)" }}>
-        Success Stories
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-10">
-        {stories.map((story, index) => (
-          <div
-            key={index}
-            className="p-6 shadow-lg rounded-md"
-            style={{
-              backgroundColor: "var(--bg-color)", 
-              color: "var(--text-color)",
-            }}
-          >
-            <img
-              src={story.image}
-              alt={`Portrait of ${story.name}`}
-              className="w-32 h-32 mx-auto rounded-full mb-4"
-            />
-            <h3 className="text-xl font-semibold mb-2">{story.name}</h3>
-            <p className="story-text">
-              <Typewriter
-                words={[story.story]}
-                loop={1}  // You can adjust the loop as needed
-                typeSpeed={70}
-                deleteSpeed={50}
-                delaySpeed={1500}
-              />
-            </p>
-          </div>
-        ))}
+    <section className="flex flex-col lg:flex-row items-center justify-around px-8 py-12 bg-white relative">
+      {/* Left section with text content */}
+      <div className="max-w-lg text-left">
+        <p className="text-orange-500 font-semibold text-lg">Success Story</p>
+        <h2 className="text-5xl font-bold text-gray-900 leading-snug mt-2">
+          We Help Fellow Nonprofits Access The Funding Tools, Training
+        </h2>
+        <p className="text-gray-600 mt-4 text-lg">
+          Our secure online donation platform allows you to make contributions
+          quickly and safely. Choose from various payment methods and set up
+          one-time donations exactly how you want.
+        </p>
+        <button className="mt-6 px-6 py-3 border border-black text-black rounded-full shadow-lg hover:bg-yellow-400 transition duration-400 flex items-center group">
+          Our Success Story
+          <span className="ml-2 transition-transform duration-300 transform rotate-[-60deg] group-hover:rotate-0">
+            <FaArrowRight size={16} />
+          </span>
+        </button>
+      </div>
+
+      {/* Right section with image and "Years of Experience" */}
+      <div className="relative mt-12 lg:mt-0">
+        <img
+          className="rounded-lg shadow-xl w-full max-w-xl object-cover"
+          src={img}
+          alt="Children studying"
+        />
+
+        {/* Years of Experience box with circular animation */}
+        <div className="absolute -left-12 top-12 bg-gray-100 p-6 rounded-lg shadow-md w-44 text-center animate-circular-motion">
+          <p className="text-5xl font-bold text-gray-900">16</p>
+          <p className="text-gray-600 text-sm uppercase font-semibold tracking-wide flex flex-col">
+            Years <br /> of <br /> Experience
+          </p>
+        </div>
+
+        {/* Adam Cruz quote box with circular animation */}
+        <div className="absolute -bottom-20 left-10 bg-white p-6 rounded-lg shadow-xl w-80 animate-circular-motion-2">
+          <p className="text-lg font-semibold">Adam Cruz</p>
+          <p className="text-gray-600 mt-2 text-sm">
+            Our success stories highlight the real-life impact of your donations
+            & the resilience of those we help. These narratives showcase the
+            power of compassion.
+          </p>
+          <span className="text-orange-500 text-4xl font-bold absolute top-0 left-2">
+            “
+          </span>
+        </div>
       </div>
     </section>
   );

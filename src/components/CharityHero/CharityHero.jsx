@@ -37,7 +37,7 @@ const CharityHero = () => {
             <span className="text-red-500">✔</span> Charity For Education
           </span>
           <span className="flex items-center gap-2 text-gray-800 font-medium">
-            <span className="text-blue-500">✔</span> Charity For Medical
+            <span className="text-blue-500"><p>✔</p></span> Charity For Medical
           </span>
         </div>
 

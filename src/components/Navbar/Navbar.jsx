@@ -70,7 +70,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="navbar  bg-gradient-to-r from-green-700 to-green-900 p-5 sticky top-0 shadow-lg flex justify-between items-center">
+      <div className="navbar  bg-[#1A685B] p-5 sticky top-0 shadow-lg flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center">
           <Link to="/" className="text-xl">

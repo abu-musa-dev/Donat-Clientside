@@ -11,6 +11,9 @@ import { Outlet } from "react-router-dom";
 import CharityServices from "../components/CharityServices/CharityServices";
 import CharityHero from "../components/CharityHero/CharityHero";
 import Stats from "../components/Stats/Stats";
+import CallToAction from "../CallToAction/CallToAction";
+import FAQSection from "../FAQSection/FAQSection";
+import Testimonial from "../Testimonial/Testimonial";
 
 const Home = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -41,11 +44,14 @@ const Home = () => {
       <RunningCampaigns />
       {/* <About /> */}
       {/* <DonationStats isDarkMode={isDarkMode} /> */}
-      {/* <SuccessStories isDarkMode={isDarkMode} /> */}
       {/* <Ourmision /> */}
-      <Stats></Stats>
       <CharityHero></CharityHero>
       <CharityServices></CharityServices>
+      <Stats></Stats>
+      <CallToAction></CallToAction>
+      <SuccessStories isDarkMode={isDarkMode} />
+      <Testimonial></Testimonial>
+      <FAQSection></FAQSection>
       <Outlet />
       <Footer />
     </div>
