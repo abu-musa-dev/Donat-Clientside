@@ -1,47 +1,55 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaSpinner, FaExclamationCircle } from "react-icons/fa";
-import bannerimg from '../../assets/smallbanner.jpg';
-import Footer from "../../Footer/Footer";
+import { getAuth, onAuthStateChanged } from "firebase/auth"; // Firebase Auth
+import bannerimg from '../../assets/smallbanner.jpg'; 
+import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
 
 const MyDonations = () => {
   const [donations, setDonations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [userEmail, setUserEmail] = useState(null);
 
+  // ✅ Firebase Authentication থেকে ইউজারের ইমেইল সেট করা
   useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserEmail(user.email); // লগইন করা ইউজারের ইমেইল সেট করুন
+      } else {
+        setUserEmail(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  // ✅ API থেকে ডোনেশন লোড করা
+  useEffect(() => {
+    if (!userEmail) return;
+
     const fetchDonations = async () => {
       try {
-        // **API থেকে ডাটা ফেচ করার জন্য নিচের কোডটি আনকমেন্ট করুন**
-        // const response = await axios.get("http://localhost:3001/api/my-donations", {
-        //   params: { email: "john.doe@example.com" }, // **এখানে ইউজারের ইমেইল যুক্ত করুন**
-        // });
-        // setDonations(response.data);
+        const response = await axios.get(`http://localhost:3001/api/myDonations/${userEmail}`);
 
-        // **ডেমো ডাটা**
-        const demoDonations = [
-          { campaignTitle: "Help Flood Victims", amount: 50, date: "2024-03-01" },
-          { campaignTitle: "Education for Kids", amount: 100, date: "2024-02-20" },
-          { campaignTitle: "Medical Aid for Orphans", amount: 75, date: "2024-01-15" },
-        ];
-
-        setDonations(demoDonations);
+        console.log("Fetched Donations:", response.data);
+        setDonations(response.data);
         setLoading(false);
       } catch (err) {
+        console.error("Error fetching donations:", err);
         setError("Failed to load donations.");
         setLoading(false);
       }
     };
 
     fetchDonations();
-  }, []);
+  }, [userEmail]); // ইউজারের ইমেইল চেঞ্জ হলে API কল হবে
 
   return (
     <div className="bg-gray-100 min-h-screen">
       <Navbar />
-
-      {/* ✅ **ব্যানার সেকশন (গ্রেডিয়েন্ট যোগ করা হয়েছে)** */}
       <div className="relative w-full h-64">
         <div
           className="absolute inset-0"
@@ -56,7 +64,6 @@ const MyDonations = () => {
         </div>
       </div>
 
-      {/* ✅ **লোডিং এবং এরর হ্যান্ডলিং** */}
       {loading && (
         <div className="flex flex-col items-center justify-center h-96">
           <FaSpinner className="animate-spin text-green-500 text-5xl mb-3" />
@@ -72,7 +79,7 @@ const MyDonations = () => {
       )}
 
       {!loading && !error && (
-        <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-lg mt-10 p-6">
+        <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-lg mt-10 mb-10 p-6">
           <h2 className="text-3xl font-bold text-center text-green-700 mb-6">
             Your Donation History
           </h2>
@@ -97,7 +104,7 @@ const MyDonations = () => {
                       key={index}
                       className="text-center bg-gray-50 even:bg-gray-100 hover:bg-green-50 transition"
                     >
-                      <td className="py-4 px-6 border">{donation.campaignTitle}</td>
+                      <td className="py-4 px-6 border">{donation.donationTitle}</td>
                       <td className="py-4 px-6 border text-green-600 font-semibold">
                         ${donation.amount}
                       </td>

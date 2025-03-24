@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from '../../firebase';
 import { Toaster, toast } from "react-hot-toast";
@@ -11,9 +11,11 @@ const Navbar = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
-  const [loginToastShown, setLoginToastShown] = useState(sessionStorage.getItem("loginToastShown") === "true");
+  const [loginToastShown, setLoginToastShown] = useState(
+    sessionStorage.getItem("loginToastShown") === "true"
+  );
 
+  // Dark mode setup
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") {
@@ -25,25 +27,23 @@ const Navbar = () => {
     }
   }, []);
 
+  // User authentication check
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser || null);
+
+      // ✅ Toast only when user logs in for the first time
       if (currentUser && !loginToastShown) {
         toast.success("Logged in successfully!", { duration: 8000, position: "top-center" });
         setLoginToastShown(true);
         sessionStorage.setItem("loginToastShown", "true");
-      } else {
-        sessionStorage.removeItem("loginToastShown");
       }
     });
 
     return () => unsubscribe();
   }, [loginToastShown]);
 
-  useEffect(() => {
-    setLoginToastShown(true);
-  }, [location.pathname]);
-
+  // Logout function
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
@@ -58,6 +58,7 @@ const Navbar = () => {
       });
   };
 
+  // Theme toggle function
   const handleThemeToggle = () => {
     setIsDarkMode((prevMode) => {
       const newMode = !prevMode;
@@ -70,7 +71,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="navbar  bg-[#1A685B] p-5 sticky top-0 shadow-lg flex justify-between items-center">
+      <div className="navbar bg-[#1A685B] p-5 sticky  shadow-lg flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center">
           <Link to="/" className="text-xl">
@@ -81,7 +82,7 @@ const Navbar = () => {
         {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-6">
           <Link to="/" className="text-white font-bold hover:text-yellow-400 transition duration-300">Home</Link>
-          <Link to="/allcamping" className="text-white font-bold hover:text-yellow-400 transition duration-300">All camping</Link>
+          <Link to="/allcamping" className="text-white font-bold hover:text-yellow-400 transition duration-300">All Camping</Link>
           <Link to="/AddNewCampaign" className="text-white font-bold hover:text-yellow-400 transition duration-300">Add New Camping</Link>
           <Link to="/mycamping" className="text-white font-bold hover:text-yellow-400 transition duration-300">My Campaign</Link>
           <Link to="/my-donations" className="text-white font-bold hover:text-yellow-400 transition duration-300">My Donations</Link>
@@ -89,7 +90,7 @@ const Navbar = () => {
 
         {/* Right Side (Theme Toggle + Login/Logout + Hamburger) */}
         <div className="flex items-center space-x-4">
-          {/* Theme Toggle - MD te Login er kache */}
+          {/* Theme Toggle */}
           <button onClick={handleThemeToggle} className="p-2 rounded-full bg-[#FFAC00] text-black transition duration-300">
             {isDarkMode ? <SunIcon className="h-6 w-6" /> : <MoonIcon className="h-6 w-6" />}
           </button>
@@ -98,7 +99,7 @@ const Navbar = () => {
           {user ? (
             <div className="hidden md:flex items-center space-x-2">
               <img src={user.photoURL || "https://via.placeholder.com/40"} alt="Profile" className="w-10 h-10 rounded-full border-2 border-yellow-400" />
-              <button onClick={handleLogout} className="px-5 py-2 bg-yellow-500 text-white font-bold rounded-full shadow-md hover:bg-yellow-600 transition duration-300">
+              <button onClick={handleLogout} className="px-5 py-2 bg-[#FFAC00] text-white font-bold rounded-full shadow-md transition duration-300">
                 Logout
               </button>
             </div>
@@ -119,7 +120,7 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="md:hidden flex flex-col items-center bg-green-900 p-4 space-y-4 absolute top-16 right-0 w-full shadow-lg z-10">
           <Link to="/" onClick={() => setIsMenuOpen(false)} className="text-white font-bold hover:text-yellow-400 transition duration-300">Home</Link>
-          <Link to="/allcamping" onClick={() => setIsMenuOpen(false)} className="text-white font-bold hover:text-yellow-400 transition duration-300">All camping</Link>
+          <Link to="/allcamping" onClick={() => setIsMenuOpen(false)} className="text-white font-bold hover:text-yellow-400 transition duration-300">All Camping</Link>
           <Link to="/AddNewCampaign" onClick={() => setIsMenuOpen(false)} className="text-white font-bold hover:text-yellow-400 transition duration-300">Add New Camping</Link>
           <Link to="/mycamping" onClick={() => setIsMenuOpen(false)} className="text-white font-bold hover:text-yellow-400 transition duration-300">My Campaign</Link>
           <Link to="/my-donations" onClick={() => setIsMenuOpen(false)} className="text-white font-bold hover:text-yellow-400 transition duration-300">My Donations</Link>

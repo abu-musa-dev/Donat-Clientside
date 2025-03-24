@@ -1,9 +1,9 @@
 import React from "react";
-import Serviceimg from '../../assets/service-card-icon1-1.png';
-import Educationimg from '../../assets/service-card-icon1-2.png';
-import Medicineimg from '../../assets/service-card-icon1-3.png';
-import BgImage from '../../assets/bground.png';
-import { AiOutlineArrowRight } from "react-icons/ai"
+import Serviceimg from "../../assets/service-card-icon1-1.png";
+import Educationimg from "../../assets/service-card-icon1-2.png";
+import Medicineimg from "../../assets/service-card-icon1-3.png";
+import BgImage from "../../assets/bground.png";
+import { AiOutlineArrowRight } from "react-icons/ai";
 
 const services = [
   {
@@ -36,9 +36,17 @@ const CharityServices = () => {
       ></div>
 
       <div className="relative z-10">
-        <h3 className="text-yellow-500 text-lg font-semibold uppercase tracking-wide">
-        <hr className="w-16 border-t-2 border-yellow-500 mx-4" />Charity Services<hr className="w-16 border-t-2 border-yellow-500 mx-4" />
-        </h3>
+        <div className="flex justify-center items-center space-x-4 mt-4">
+          {/* Left HR line */}
+          <hr className="w-16 border-t-2 border-yellow-500" />
+          {/* Title */}
+          <h3 className="text-yellow-600 text-lg font-semibold uppercase tracking-wide">
+            Charity Services
+          </h3>
+          {/* Right HR line */}
+          <hr className="w-16 border-t-2 border-yellow-500" />
+        </div>
+
         <h2 className="text-4xl font-bold text-gray-900 mt-2">
           We Do It For All People
         </h2>
@@ -70,12 +78,14 @@ const CharityServices = () => {
                 {service.description}
               </p>
               {/* Button with Side-Fade Hover Effect */}
-              <button className="mt-6 text-xs bg-yellow-500 text-white py-1.5 px-4 rounded-full border border-yellow-600 shadow-md transition-all duration-500 
+              <button
+                className="mt-6 text-xs bg-yellow-500 text-white py-1.5 px-4 rounded-full border border-yellow-600 shadow-md transition-all duration-500 
                 relative overflow-hidden hover:text-white hover:border-none
-                before:absolute before:inset-0 before:bg-gradient-to-r before:from-[rgba(22,163,74,0)] before:via-[rgba(22,163,74,0.7)] before:to-[rgba(22,163,74,0)] 
-                before:transition-all before:duration-500 before:scale-x-0 hover:before:scale-x-100">
-                Learn More           <AiOutlineArrowRight className="inline-block transition-transform rotate-[-60deg] duration-300 transform ml-2 group-hover:rotate-0" /> {/* Arrow icon */}
-                
+                before:absolute before:inset-0 "
+              >
+                Learn More{" "}
+                <AiOutlineArrowRight className="inline-block transition-transform rotate-[-60deg] duration-300 transform ml-2 group-hover:rotate-0" />{" "}
+                {/* Arrow icon */}
               </button>
             </div>
           ))}

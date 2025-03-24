@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
-import Footer from "../../Footer/Footer";
+import Navbar from "../../components/Navbar/Navbar";
+import Footer from "../../components/Footer/Footer";
+import { FaSpinner } from "react-icons/fa"; // Importing FaSpinner
 
 const AllCampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
@@ -51,7 +52,7 @@ const AllCampaigns = () => {
   if (loading)
     return (
       <div className="flex justify-center py-10">
-        <span className="loading loading-spinner text-green-600"></span>
+        <FaSpinner className="animate-spin text-green-600 text-5xl" /> {/* Added spinner here */}
       </div>
     );
   if (error) return <div className="text-center text-red-600">{error}</div>;
@@ -78,7 +79,7 @@ const AllCampaigns = () => {
             className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-all"
           >
             Sort by Minimum Donation (
-            {sortOrder === "asc" ? "Ascending" : "Descending"})
+            {sortOrder === "asc" ? "Ascending" : "Descending"} )
           </button>
         </div>
 

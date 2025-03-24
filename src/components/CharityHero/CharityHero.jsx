@@ -32,32 +32,33 @@ const CharityHero = () => {
         </p>
 
         {/* Charity Categories */}
-        <div className="flex flex-wrap gap-4 mb-6 justify-center md:justify-start">
-          <span className="flex items-center gap-2 text-gray-800 font-medium">
-            <span className="w-6 h-6 bg-green-500 text-white rounded-full flex items-center justify-center">
-              <FaCheck className="text-white" />
-            </span>{" "}
-            Charity For Foods
-          </span>
-          <span className="flex items-center gap-2 text-gray-800 font-medium">
-            <span className="w-6 h-6 bg-yellow-500 text-white rounded-full flex items-center justify-center">
-              <FaCheck className="text-white" />
-            </span>{" "}
-            Charity For Water
-          </span>
-          <span className="flex items-center gap-2 text-gray-800 font-medium">
-            <span className="w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center">
-              <FaCheck className="text-white" />
-            </span>{" "}
-            Charity For Education
-          </span>
-          <span className="flex items-center gap-2 text-gray-800 font-medium">
-            <span className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center">
-              <FaCheck className="text-white" />
-            </span>{" "}
-            Charity For Medical
-          </span>
-        </div>
+        <div className="flex flex-wrap sm:text-left gap-4 mb-6 justify-start sm:justify-start">
+  <span className="flex items-center gap-2 text-gray-800 font-medium">
+    <span className="w-6 h-6 bg-green-500 text-white rounded-full flex items-center justify-center">
+      <FaCheck className="text-white" />
+    </span>{" "}
+    Charity For Foods
+  </span>
+  <span className="flex sm:text-left items-center gap-2 text-gray-800 font-medium">
+    <span className="w-6 h-6 bg-yellow-500 text-white rounded-full flex items-center justify-center">
+      <FaCheck className="text-white" />
+    </span>{" "}
+    Charity For Water
+  </span>
+  <span className="flex items-center gap-2 text-gray-800 font-medium">
+    <span className="w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center">
+      <FaCheck className="text-white" />
+    </span>{" "}
+    Charity for Education
+  </span>
+  <span className="flex items-center gap-2 text-gray-800 font-medium">
+    <span className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center">
+      <FaCheck className="text-white" />
+    </span>{" "}
+    Charity For Medical
+  </span>
+</div>
+
 
         {/* Line before "About More" button */}
         <hr className="border-t-2 border-gray-300 w-1/4 mx-auto mb-4" />

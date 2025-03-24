@@ -7,7 +7,6 @@ import { AuthProvider } from "./contexts/AuthContext";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Home from "./Pages/Home";
-import Campaigns from "./components/AddNewCampaign/AddNewCampaign";
 import Details from "./components/Details/Details";
 import Login from "./Pages/Login/Login";
 import NotFound from "./Pages/NotFound/NotFound";
@@ -17,13 +16,12 @@ import UpdateProfile from "./components/UpdateProfile/UpdateProfile";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import ForgotPassword from "./Pages/Login/ForgotPassword";
 import MyDonations from "./components/MyDonations/MyDonations";
-import AllCampaigns from "./components/AllCampaigns/AllCampaigns";
+import AllCampaigns from "./Pages/Campings/AllCampaigns";
 import Mycamping from "./components/MyCamping/Mycamping";
 import RunningCampaigns from "./components/RunningCampaigns/RunningCampaigns";
-import CampaignDetails from "./components/CampaignDetails/CampaignDetails";
-// import AddNewCampaign from './components/AddNewCampaign/AddNewCampaign';
+import CampaignDetails from "./Pages/Campings/CampaignDetails";
 import UpdateCampaign from "./components/UpdateCampaign/UpdateCampaign";
-import AddNewCampaign from "./components/AddNewCampaign/AddNewCampaign";
+import AddNewCampaign from "./Pages/Campings/AddNewCampaign";
 
 const router = createBrowserRouter([
   {
@@ -78,7 +76,7 @@ const router = createBrowserRouter([
 
   {
     path: "AddNewCampaign",
-    element: <AddNewCampaign></AddNewCampaign>, // Campaigns Page
+    element: <AddNewCampaign></AddNewCampaign> // Campaigns Page
   },
   // {
   //   path: "/campings",

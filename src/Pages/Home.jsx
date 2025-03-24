@@ -2,18 +2,15 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar/Navbar"; 
 import Banner from "../components/Banner/Banner";
 import RunningCampaigns from "../components/RunningCampaigns/RunningCampaigns";
-import About from "../About/About";
-import DonationStats from "../About/DonationStats";
-import SuccessStories from "../About/SuccessStories";
-import Ourmision from "../components/Ourmision/Ourmision";
-import Footer from "../Footer/Footer";
+import SuccessStories from "../components/SuccessStories/SuccessStories";
+import Footer from "../components/Footer/Footer";
 import { Outlet } from "react-router-dom";
 import CharityServices from "../components/CharityServices/CharityServices";
 import CharityHero from "../components/CharityHero/CharityHero";
 import Stats from "../components/Stats/Stats";
-import CallToAction from "../CallToAction/CallToAction";
-import FAQSection from "../FAQSection/FAQSection";
-import Testimonial from "../Testimonial/Testimonial";
+import CallToAction from "../components/CallToAction/CallToAction";
+import FAQSection from "../components/FAQSection/FAQSection";
+import Testimonial from "../components/Testimonial/Testimonial";
 
 const Home = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -42,9 +39,6 @@ const Home = () => {
       <Navbar isDarkMode={isDarkMode} onThemeToggle={handleThemeToggle} />
       <Banner />
       <RunningCampaigns />
-      {/* <About /> */}
-      {/* <DonationStats isDarkMode={isDarkMode} /> */}
-      {/* <Ourmision /> */}
       <CharityHero></CharityHero>
       <CharityServices></CharityServices>
       <Stats></Stats>

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { FaQuoteRight } from "react-icons/fa";
-import img1 from '../assets/testmonial.png';
-import img2 from '../assets/testmonial2.png';
+import img1 from '../../assets/testmonial.png';
+import img2 from '../../assets/testmonial2.png';
 
 const testimonials = [
   {

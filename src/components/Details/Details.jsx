@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Toaster, toast } from "react-hot-toast"; // For toast notification
 import Navbar from "../Navbar/Navbar";
-import Footer from "../../Footer/Footer";
+import Footer from "../Footer/Footer";
 
 const Details = () => {
   const { id } = useParams(); // Get the campaign ID from the URL

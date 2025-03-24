@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
-import Navbar from "../Navbar/Navbar";
-import Footer from "../../Footer/Footer";
+import { auth } from "../../firebase"; // Firebase auth import
+import Navbar from "../../components/Navbar/Navbar";
+import Footer from "../../components/Footer/Footer";
+import { FaSpinner } from "react-icons/fa";
 
 const CampaignDetails = ({ refreshDonations }) => {
   const { id } = useParams();
@@ -11,14 +13,15 @@ const CampaignDetails = ({ refreshDonations }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [donationAmount, setDonationAmount] = useState("");
+  const [donationTitle, setDonationTitle] = useState(""); 
 
+  // Fetch campaign data
   useEffect(() => {
     const fetchCampaign = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:3001/api/campaigns/${id}`
-        );
+        const response = await axios.get(`http://localhost:3001/api/campaigns/${id}`);
         setCampaign(response.data);
+        setDonationTitle(response.data.title);
         setLoading(false);
       } catch (err) {
         setError("Failed to fetch campaign details.");
@@ -28,7 +31,19 @@ const CampaignDetails = ({ refreshDonations }) => {
     fetchCampaign();
   }, [id]);
 
+  // Donation submit function
   const handleDonate = async () => {
+    const user = auth.currentUser; // Firebase থেকে ইউজার তথ্য নিয়ে আসা
+
+    if (!user) {
+      Swal.fire({
+        icon: "error",
+        title: "Unauthorized",
+        text: "You must be logged in to donate.",
+      });
+      return;
+    }
+
     if (isNaN(parseFloat(donationAmount)) || donationAmount <= 0) {
       Swal.fire({
         icon: "error",
@@ -37,20 +52,28 @@ const CampaignDetails = ({ refreshDonations }) => {
       });
       return;
     }
+
     try {
-      await axios.post("http://localhost:3001/api/donate", {
+      const response = await axios.post("http://localhost:3001/api/donate", {
         campaignId: id,
         amount: parseFloat(donationAmount),
-        donorName: "John Doe",
-        donorEmail: "john.doe@example.com",
+        donationTitle: donationTitle,
+        donorName: user.displayName || "Anonymous", // ইউজারের নাম
+        donorEmail: user.email, // ইউজারের ইমেইল পাঠাচ্ছি
       });
+
       Swal.fire({
         icon: "success",
         title: "Thank You!",
         text: "Your donation has been successfully processed.",
       });
+
       setDonationAmount("");
-      refreshDonations("john.doe@example.com");
+      setDonationTitle("");
+
+      if (refreshDonations) {
+        refreshDonations(user.email); // ইউজারের ইমেইল দিয়ে ডাটা রিফ্রেশ
+      }
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -63,7 +86,7 @@ const CampaignDetails = ({ refreshDonations }) => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <p className="text-lg font-semibold">Loading campaign details...</p>
+        <FaSpinner className="animate-spin text-green-600 text-5xl" /> {/* Added spinner here */}
       </div>
     );
   }
@@ -81,11 +104,7 @@ const CampaignDetails = ({ refreshDonations }) => {
       <Navbar></Navbar>
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
         <figure className="w-full">
-          <img
-            src={campaign.image}
-            alt={campaign.title}
-            className="w-full h-64 object-cover rounded-t-lg"
-          />
+          <img src={campaign.image} alt={campaign.title} className="w-full h-64 object-cover rounded-t-lg" />
         </figure>
         <div className="p-6">
           <h1 className="text-3xl font-semibold text-[#1A685B] mb-4">{campaign.title}</h1>
@@ -102,7 +121,7 @@ const CampaignDetails = ({ refreshDonations }) => {
             </label>
             <input
               type="number"
-              className="input input-bordered w-full text-xl py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1A685B]"
+              className="input input-bordered w-full text-xl py-2 px-4 rounded-lg"
               value={donationAmount}
               onChange={(e) => setDonationAmount(e.target.value)}
               placeholder={`Minimum $${campaign.minimumDonation}`}
@@ -111,7 +130,7 @@ const CampaignDetails = ({ refreshDonations }) => {
 
           <div className="mt-6">
             <button
-              className="btn btn-primary w-full py-3 text-white bg-[#1A685B] hover:bg-[#145b4b] rounded-full transition-all duration-300 ease-in-out transform hover:scale-105"
+              className="btn btn-primary w-full py-3 text-white bg-[#1A685B] rounded-full"
               onClick={handleDonate}
             >
               Donate Now

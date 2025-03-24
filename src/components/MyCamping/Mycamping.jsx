@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
-import Footer from '../../Footer/Footer';
+import Footer from '../Footer/Footer';
 import img from '../../assets/smallbanner.jpg';
+import { FaSpinner } from "react-icons/fa";
 
 const Mycamping = () => {
   const [campaigns, setCampaigns] = useState([]);
@@ -59,7 +60,7 @@ const Mycamping = () => {
   };
 
   if (loading) {
-    return <div className="flex justify-center py-10"><span className="loading loading-spinner text-success"></span></div>;
+    return <div className="flex justify-center py-10"> <FaSpinner className="animate-spin text-green-600 text-5xl" /> {/* Added spinner here */}</div>;
   }
 
   return (

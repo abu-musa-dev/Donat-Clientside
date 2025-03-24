@@ -13,8 +13,8 @@ const Banner = () => {
   const slides = [
     {
       url: banner1,
-      header: "Welcome to Donate City", // Fixed typo
-      title: "Every Donation Counts, Every Heart Matters", // Fixed typo
+      header: "Welcome to Donate City",
+      title: "Every Donation Counts, Every Heart Matters",
     },
     {
       url: banner2,
@@ -23,60 +23,55 @@ const Banner = () => {
     },
     {
       url: banner3,
-      header: "Join Donate City", // Fixed typo
+      header: "Join Donate City",
       title: "Helping Others Today Creates a Better Tomorrow for All",
     },
   ];
 
   // Settings for react-slick
   const settings = {
-    dots: true, // Show dots for navigation
-    infinite: true, // Infinite loop
-    speed: 500, // Transition speed
-    slidesToShow: 1, // Display one slide at a time
-    slidesToScroll: 1, // Scroll one slide at a time
-    autoplay: true, // Auto play slides
-    autoplaySpeed: 3000, // Time between slides
-    arrows: true, // Show arrows
-    pauseOnHover: true, // Pause when hovering
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    arrows: true,
+    pauseOnHover: true,
   };
 
   return (
-    <section className="h-screen w-full relative">
+    <section className="w-full relative">
       <Slider {...settings}>
         {slides.map((slide, index) => (
-          <div key={index} className="relative h-screen w-full">
+          <div key={index} className="relative w-full h-[70vh] sm:h-[80vh] md:h-screen">
             <img
               src={slide.url}
               className="w-full h-full object-cover transition-transform duration-1000 ease-in-out transform hover:scale-105"
               alt={slide.title}
             />
-            {/* Background overlay for better text readability */}
+            {/* Background overlay */}
             <div className="absolute inset-0 bg-black opacity-60"></div>
-            {/* Centering text using flexbox */}
-            <div className="absolute top-1/2 left-1/2 w-3/4 mx-auto transform -translate-x-1/2 -translate-y-1/2 text-center text-white p-6 space-y-6">
-              {/* Header with HR lines on both sides */}
-              <div className="flex justify-center items-center space-x-4">
-                {/* Left side line */}
-                <hr className="w-16 border-t-2 border-yellow-500" />
-                {/* Text */}
-                <span className="text-lg text-yellow-500 font-italic sm:text-xl md:text-2xl">
+            {/* Centered text */}
+            <div className="absolute top-1/2 left-1/2 w-[90%] sm:w-3/4 mx-auto transform -translate-x-1/2 -translate-y-1/2 text-center text-white p-4 sm:p-6 space-y-4 sm:space-y-6">
+              <div className="flex justify-center items-center space-x-2 sm:space-x-4">
+                <hr className="w-10 sm:w-16 border-t-2 border-yellow-600" />
+                <span className="text-sm sm:text-lg md:text-2xl text-[#B47D19] font-semibold">
                   {slide.header}
                 </span>
-                {/* Right side line */}
-                <hr className="w-16 border-t-2 border-yellow-500" />
+                <hr className="w-10 sm:w-16 border-t-2 border-yellow-600" />
               </div>
 
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+              <h2 className="text-2xl sm:text-4xl md:text-6xl font-extrabold leading-tight">
                 {slide.title}
               </h2>
             </div>
-            {/* Call-to-action button at the bottom of the screen */}
-            <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2">
-              <button className="bg-[#1A685B] text-white px-6 py-3 rounded-full shadow-md hover:bg-green-700 transition-all">
+            {/* Call-to-action button */}
+            <div className="absolute bottom-10 sm:bottom-20 left-1/2 transform -translate-x-1/2">
+              <button className="bg-[#1A685B] text-white px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-lg rounded-full shadow-md hover:bg-white hover:text-black transition-all flex items-center group">
                 Donate Now{" "}
-                <AiOutlineArrowRight className="inline-block transition-transform rotate-[-60deg] duration-300 transform ml-2 group-hover:rotate-0" />{" "}
-                {/* Arrow icon */}
+                <AiOutlineArrowRight className="inline-block rotate-[-45deg] transition-transform duration-300 transform ml-2 group-hover:rotate-0" />
               </button>
             </div>
           </div>

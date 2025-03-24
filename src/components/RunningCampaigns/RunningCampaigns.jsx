@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { AiOutlineArrowRight } from "react-icons/ai"; // Arrow icon import
+import { FaSpinner } from "react-icons/fa"; // Import FaSpinner
 
 const RunningCampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
@@ -49,7 +50,8 @@ const RunningCampaigns = () => {
       </h2>
       {campaigns.length === 0 ? (
         <div className="flex justify-center items-center">
-          <span className="loading loading-spinner text-success"></span>
+          <FaSpinner className="animate-spin text-green-500 text-5xl mb-3" /> {/* Spinner added here */}
+          <p className="ml-3 text-lg text-gray-600">Loading campaigns...</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">

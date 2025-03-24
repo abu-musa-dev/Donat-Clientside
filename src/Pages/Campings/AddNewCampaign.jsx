@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
 import { Toaster, toast } from "react-hot-toast";
-import Navbar from "../Navbar/Navbar";
-import Footer from "../../Footer/Footer";
+import Navbar from "../../components/Navbar/Navbar";
+import Footer from "../../components/Footer/Footer";
 import { useAuth } from "../../contexts/AuthContext";
 import img from "../../assets/smallbanner.jpg";
 

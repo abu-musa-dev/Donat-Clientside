@@ -4,7 +4,7 @@ import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 
 import { Toaster, toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
-import Footer from "../../Footer/Footer";
+import Footer from "../../components/Footer/Footer";
 
 const Login = () => {
   const [email, setEmail] = useState("");
