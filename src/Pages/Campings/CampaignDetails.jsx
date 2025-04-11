@@ -130,7 +130,7 @@ const CampaignDetails = ({ refreshDonations }) => {
 
           <div className="mt-6">
             <button
-              className="btn btn-primary w-full py-3 text-white bg-[#1A685B] rounded-full"
+              className="btn  hover:bg-yellow-500 w-full py-3 text-white bg-[#1A685B] rounded-full"
               onClick={handleDonate}
             >
               Donate Now

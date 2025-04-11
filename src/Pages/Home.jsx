@@ -37,10 +37,10 @@ const Home = () => {
   return (
     <div className={`home ${isDarkMode ? "dark-mode" : ""}`}>
       <Navbar isDarkMode={isDarkMode} onThemeToggle={handleThemeToggle} />
-      <Banner />
+      <Banner  />
       <RunningCampaigns />
       <CharityHero></CharityHero>
-      <CharityServices></CharityServices>
+      <CharityServices ></CharityServices>
       <Stats></Stats>
       <CallToAction></CallToAction>
       <SuccessStories isDarkMode={isDarkMode} />
