@@ -12,12 +12,12 @@ const MyDonations = () => {
   const [error, setError] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
 
-  // ✅ Firebase Authentication থেকে ইউজারের ইমেইল সেট করা
+
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setUserEmail(user.email); // লগইন করা ইউজারের ইমেইল সেট করুন
+        setUserEmail(user.email); 
       } else {
         setUserEmail(null);
       }
@@ -26,13 +26,13 @@ const MyDonations = () => {
     return () => unsubscribe();
   }, []);
 
-  // ✅ API থেকে ডোনেশন লোড করা
+  
   useEffect(() => {
     if (!userEmail) return;
 
     const fetchDonations = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/api/myDonations/${userEmail}`);
+        const response = await axios.get(`https://donat-serverside.vercel.app/api/myDonations/${userEmail}`);
 
         console.log("Fetched Donations:", response.data);
         setDonations(response.data);

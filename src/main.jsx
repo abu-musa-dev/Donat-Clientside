@@ -1,10 +1,11 @@
-// src/index.js
-import { StrictMode } from "react";
+import React, { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import { BrowserRouter as Router } from "react-router-dom";
-import { AuthProvider } from "./contexts/AuthContext";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+import { AuthProvider } from "./contexts/AuthContext"; // AuthContext এর প্রোভাইডার
+import { ThemeProvider } from "./contexts/ThemeContext"; // ThemeContext এর প্রোভাইডার
 
 import Home from "./Pages/Home";
 import Details from "./components/Details/Details";
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/allcamping",
-    element: <AllCampaigns></AllCampaigns>, // Home Page
+    element: <AllCampaigns />, // All Campaign Page
   },
   {
     path: "/mycamping",
@@ -42,28 +43,28 @@ const router = createBrowserRouter([
       <PrivateRoute>
         <Mycamping />
       </PrivateRoute>
-    ), // My Campaigns Page
+    ), // My Campaign Page
   },
-  
-
   {
     path: "/my-donations",
-    element: (<MyDonations></MyDonations> )// Home Page
+    element: (
+      <PrivateRoute>
+        <MyDonations />
+      </PrivateRoute>
+    ), // My Donations Page
   },
   {
-    path: "/",
-    element: <RunningCampaigns></RunningCampaigns>, // Home Page
+    path: "/running-campaigns",
+    element: <RunningCampaigns />, // Running Campaigns Page
   },
- 
   {
     path: "/campaign/:id",
     element: (
       <PrivateRoute>
-        <CampaignDetails/>
+        <CampaignDetails />
       </PrivateRoute>
-    ), // Update Campaign Page
+    ), // Campaign Details Page
   },
-
   {
     path: "/updateCampaign/:id",
     element: (
@@ -72,24 +73,17 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ), // Update Campaign Page
   },
-  
-
   {
-    path: "AddNewCampaign",
-    element: <AddNewCampaign></AddNewCampaign> // Campaigns Page
+    path: "/AddNewCampaign",
+    element: <AddNewCampaign />, // Add New Campaign Page
   },
-  // {
-  //   path: "/campings",
-  //   element: <AddNewCampaign></AddNewCampaign>
-  // },
-
   {
     path: "/campaigns/:id",
     element: (
       <PrivateRoute>
         <Details />
       </PrivateRoute>
-    ), // Campaign Details Page
+    ), // Campaign Detail Page
   },
   {
     path: "/login",
@@ -101,7 +95,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/forgot-password",
-    element: <ForgotPassword></ForgotPassword>, // Register Page
+    element: <ForgotPassword />, // Forgot Password Page
   },
   {
     path: "/dashboard",
@@ -127,8 +121,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <ThemeProvider> {/* ThemeProvider এখানে রাখা হয়েছে */}
+      <AuthProvider> {/* AuthProvider এর ভেতরে */}
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </ThemeProvider>
   </StrictMode>
 );

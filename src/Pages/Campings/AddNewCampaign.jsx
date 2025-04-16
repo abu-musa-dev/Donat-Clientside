@@ -67,7 +67,7 @@ const AddNewCampaign = () => {
     console.log("Campaign data being sent:", campaignData);
 
     try {
-      const response = await fetch("http://localhost:3001/api/campaigns", {
+      const response = await fetch("https://donat-serverside.vercel.app/api/campaigns", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+// src/Pages/Home.jsx
+import React, { useContext } from "react";
 import Navbar from "../components/Navbar/Navbar"; 
 import Banner from "../components/Banner/Banner";
 import RunningCampaigns from "../components/RunningCampaigns/RunningCampaigns";
@@ -11,41 +12,23 @@ import Stats from "../components/Stats/Stats";
 import CallToAction from "../components/CallToAction/CallToAction";
 import FAQSection from "../components/FAQSection/FAQSection";
 import Testimonial from "../components/Testimonial/Testimonial";
+import { ThemeContext } from "../contexts/ThemeContext"; // ThemeContext ইম্পোর্ট করা
 
 const Home = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("homeTheme");
-    if (savedTheme === "dark") {
-      setIsDarkMode(true);
-    } else {
-      setIsDarkMode(false);
-    }
-  }, []);
-
-  const handleThemeToggle = () => {
-    setIsDarkMode((prevMode) => {
-      const newMode = !prevMode;
-      const theme = newMode ? "dark" : "light";
-      localStorage.setItem("homeTheme", theme);
-      document.documentElement.setAttribute("data-theme", theme);
-      return newMode;
-    });
-  };
+  const { theme, toggleTheme } = useContext(ThemeContext); // ThemeContext থেকে থিম এবং toggleTheme নেয়া
 
   return (
-    <div className={`home ${isDarkMode ? "dark-mode" : ""}`}>
-      <Navbar isDarkMode={isDarkMode} onThemeToggle={handleThemeToggle} />
-      <Banner  />
+    <div className={`home ${theme === "dark" ? "dark-mode" : ""}`}>
+      <Navbar isDarkMode={theme === "dark"} onThemeToggle={toggleTheme} />
+      <Banner />
       <RunningCampaigns />
-      <CharityHero></CharityHero>
-      <CharityServices ></CharityServices>
-      <Stats></Stats>
-      <CallToAction></CallToAction>
-      <SuccessStories isDarkMode={isDarkMode} />
-      <Testimonial></Testimonial>
-      <FAQSection></FAQSection>
+      <CharityHero />
+      <CharityServices />
+      <Stats />
+      <CallToAction />
+      <SuccessStories />
+      <Testimonial />
+      <FAQSection />
       <Outlet />
       <Footer />
     </div>

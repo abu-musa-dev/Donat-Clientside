@@ -27,7 +27,7 @@ const Mycamping = () => {
 
   useEffect(() => {
     if (userEmail) {
-      fetch(`http://localhost:3001/api/myCampaigns/${userEmail}`)
+      fetch(`https://donat-serverside.vercel.app/api/myCampaigns/${userEmail}`)
         .then(response => response.json())
         .then(data => {
           setCampaigns(data);
@@ -46,7 +46,7 @@ const Mycamping = () => {
   };
 
   const handleDelete = () => {
-    fetch(`http://localhost:3001/api/campaigns/${campaignToDelete}`, {
+    fetch(`https://donat-serverside.vercel.app/api/campaigns/${campaignToDelete}`, {
       method: 'DELETE',
     })
       .then(() => {

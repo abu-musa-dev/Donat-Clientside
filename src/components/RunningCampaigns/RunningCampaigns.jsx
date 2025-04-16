@@ -13,7 +13,7 @@ const RunningCampaigns = () => {
 
   const fetchRunningCampaigns = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/api/runningCampaigns");
+      const response = await axios.get("https://donat-serverside.vercel.app/api/runningCampaigns");
       setCampaigns(response.data);
     } catch (error) {
       console.error("Error fetching running campaigns: ", error);

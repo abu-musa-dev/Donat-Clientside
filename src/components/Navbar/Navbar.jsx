@@ -15,15 +15,13 @@ const Navbar = () => {
     sessionStorage.getItem("loginToastShown") === "true"
   );
 
-  // Dark mode setup
+  // Dark mode setup for navbar only
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
+    const savedTheme = localStorage.getItem("navbarTheme");
     if (savedTheme === "dark") {
       setIsDarkMode(true);
-      document.documentElement.setAttribute("data-theme", "dark");
     } else {
       setIsDarkMode(false);
-      document.documentElement.setAttribute("data-theme", "light");
     }
   }, []);
 
@@ -58,20 +56,19 @@ const Navbar = () => {
       });
   };
 
-  // Theme toggle function
+  // Theme toggle function for navbar only
   const handleThemeToggle = () => {
     setIsDarkMode((prevMode) => {
       const newMode = !prevMode;
       const theme = newMode ? "dark" : "light";
-      localStorage.setItem("theme", theme);
-      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("navbarTheme", theme);
       return newMode;
     });
   };
 
   return (
     <>
-      <div className="navbar bg-[#1A685B] p-5 sticky  shadow-lg flex justify-between items-center">
+      <div className={`navbar p-5 sticky shadow-lg flex justify-between items-center ${isDarkMode ? "bg-[#1A685B]" : "bg-[#1A685B]"}`}>
         {/* Logo */}
         <div className="flex items-center">
           <Link to="/" className="text-xl">
@@ -81,11 +78,11 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-6">
-          <Link to="/" className="text-white font-bold hover:text-yellow-400 transition duration-300">Home</Link>
-          <Link to="/allcamping" className="text-white font-bold hover:text-yellow-400 transition duration-300">All Camping</Link>
-          <Link to="/AddNewCampaign" className="text-white font-bold hover:text-yellow-400 transition duration-300">Add New Camping</Link>
-          <Link to="/mycamping" className="text-white font-bold hover:text-yellow-400 transition duration-300">My Campaign</Link>
-          <Link to="/my-donations" className="text-white font-bold hover:text-yellow-400 transition duration-300">My Donations</Link>
+          <Link to="/" className={`text-white font-bold hover:text-yellow-400 transition duration-300 ${isDarkMode ? 'hover:text-gray-300' : ''}`}>Home</Link>
+          <Link to="/allcamping" className={`text-white font-bold hover:text-yellow-400 transition duration-300 ${isDarkMode ? 'hover:text-gray-300' : ''}`}>All Camping</Link>
+          <Link to="/AddNewCampaign" className={`text-white font-bold hover:text-yellow-400 transition duration-300 ${isDarkMode ? 'hover:text-gray-300' : ''}`}>Add New Camping</Link>
+          <Link to="/mycamping" className={`text-white font-bold hover:text-yellow-400 transition duration-300 ${isDarkMode ? 'hover:text-gray-300' : ''}`}>My Campaign</Link>
+          <Link to="/my-donations" className={`text-white font-bold hover:text-yellow-400 transition duration-300 ${isDarkMode ? 'hover:text-gray-300' : ''}`}>My Donations</Link>
         </div>
 
         {/* Right Side (Theme Toggle + Login/Logout + Hamburger) */}
@@ -118,7 +115,7 @@ const Navbar = () => {
 
       {/* Mobile Menu (Dropdown) */}
       {isMenuOpen && (
-        <div className="md:hidden flex flex-col items-center bg-green-900 p-4 space-y-4 absolute top-16 right-0 w-full shadow-lg z-10">
+        <div className="md:hidden flex flex-col items-center bg-[#1A685B] p-4 space-y-4 absolute top-16 right-0 w-full shadow-lg z-10">
           <Link to="/" onClick={() => setIsMenuOpen(false)} className="text-white font-bold hover:text-yellow-400 transition duration-300">Home</Link>
           <Link to="/allcamping" onClick={() => setIsMenuOpen(false)} className="text-white font-bold hover:text-yellow-400 transition duration-300">All Camping</Link>
           <Link to="/AddNewCampaign" onClick={() => setIsMenuOpen(false)} className="text-white font-bold hover:text-yellow-400 transition duration-300">Add New Camping</Link>

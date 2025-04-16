@@ -19,7 +19,7 @@ const CampaignDetails = ({ refreshDonations }) => {
   useEffect(() => {
     const fetchCampaign = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/api/campaigns/${id}`);
+        const response = await axios.get(`https://donat-serverside.vercel.app/api/campaigns/${id}`);
         setCampaign(response.data);
         setDonationTitle(response.data.title);
         setLoading(false);
@@ -54,7 +54,7 @@ const CampaignDetails = ({ refreshDonations }) => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3001/api/donate", {
+      const response = await axios.post("https://donat-serverside.vercel.app/api/donate", {
         campaignId: id,
         amount: parseFloat(donationAmount),
         donationTitle: donationTitle,
