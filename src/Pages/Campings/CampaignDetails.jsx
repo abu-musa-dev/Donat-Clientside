@@ -100,7 +100,7 @@ const CampaignDetails = ({ refreshDonations }) => {
   }
 
   return (
-    <div className="bg-[#F4F4F9] h-50 py-10">
+    <div className="bg-[#F4F4F9] h-50 ">
       <Navbar></Navbar>
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
         <figure className="w-full">
