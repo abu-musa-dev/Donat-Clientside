@@ -11,7 +11,7 @@ const UpdateCampaign = () => {
 
   // Fetch the campaign details by ID
   useEffect(() => {
-    fetch(`https://donat-serverside.vercel.app/api/campaigns/${id}`)
+    fetch(`https://donat-serverside.vercel.app/campaigns/${id}`)
       .then(response => response.json())
       .then(data => {
         setCampaign(data);
@@ -34,7 +34,7 @@ const UpdateCampaign = () => {
     e.preventDefault(); // Prevent default form behavior
 
     // Update the campaign using PUT request
-    fetch(`https://donat-serverside.vercel.app/api/campaigns/${campaign._id}`, {
+    fetch(`https://donat-serverside.vercel.app/campaigns/${campaign._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

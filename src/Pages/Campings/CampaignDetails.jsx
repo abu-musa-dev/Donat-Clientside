@@ -19,7 +19,7 @@ const CampaignDetails = ({ refreshDonations }) => {
   useEffect(() => {
     const fetchCampaign = async () => {
       try {
-        const response = await axios.get(`https://donat-serverside.vercel.app/api/campaigns/${id}`);
+        const response = await axios.get(`https://donat-serverside.vercel.app/campaigns/${id}`);
         setCampaign(response.data);
         setDonationTitle(response.data.title);
         setLoading(false);
@@ -33,7 +33,7 @@ const CampaignDetails = ({ refreshDonations }) => {
 
   // Donation submit function
   const handleDonate = async () => {
-    const user = auth.currentUser; // Firebase থেকে ইউজার তথ্য নিয়ে আসা
+    const user = auth.currentUser; 
 
     if (!user) {
       Swal.fire({
@@ -54,12 +54,12 @@ const CampaignDetails = ({ refreshDonations }) => {
     }
 
     try {
-      const response = await axios.post("https://donat-serverside.vercel.app/api/donate", {
+      const response = await axios.post("https://donat-serverside.vercel.app/donate", {
         campaignId: id,
         amount: parseFloat(donationAmount),
         donationTitle: donationTitle,
-        donorName: user.displayName || "Anonymous", // ইউজারের নাম
-        donorEmail: user.email, // ইউজারের ইমেইল পাঠাচ্ছি
+        donorName: user.displayName || "Anonymous",
+        donorEmail: user.email, 
       });
 
       Swal.fire({
@@ -72,7 +72,7 @@ const CampaignDetails = ({ refreshDonations }) => {
       setDonationTitle("");
 
       if (refreshDonations) {
-        refreshDonations(user.email); // ইউজারের ইমেইল দিয়ে ডাটা রিফ্রেশ
+        refreshDonations(user.email); 
       }
     } catch (error) {
       Swal.fire({

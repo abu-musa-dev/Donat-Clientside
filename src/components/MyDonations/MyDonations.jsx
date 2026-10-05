@@ -32,7 +32,7 @@ const MyDonations = () => {
 
     const fetchDonations = async () => {
       try {
-        const response = await axios.get(`https://donat-serverside.vercel.app/api/myDonations/${userEmail}`);
+        const response = await axios.get(`https://donat-serverside.vercel.app/myDonations/${userEmail}`);
 
         console.log("Fetched Donations:", response.data);
         setDonations(response.data);
@@ -45,7 +45,7 @@ const MyDonations = () => {
     };
 
     fetchDonations();
-  }, [userEmail]); // ইউজারের ইমেইল চেঞ্জ হলে API কল হবে
+  }, [userEmail]); 
 
   return (
     <div className="bg-gray-100 min-h-screen">

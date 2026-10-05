@@ -16,7 +16,7 @@ const AllCampaigns = () => {
 
   useEffect(() => {
     axios
-      .get("https://donat-serverside.vercel.app/api/campaigns")
+      .get("https://donat-serverside.vercel.app/campaigns")
       .then((response) => {
         const campaignsData = Array.isArray(response.data) ? response.data : [];
         setCampaigns(campaignsData);

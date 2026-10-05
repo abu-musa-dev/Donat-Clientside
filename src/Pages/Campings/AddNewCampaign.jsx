@@ -67,7 +67,7 @@ const AddNewCampaign = () => {
     console.log("Campaign data being sent:", campaignData);
 
     try {
-      const response = await fetch("https://donat-serverside.vercel.app/api/campaigns", {
+      const response = await fetch("https://donat-serverside.vercel.app/campaigns", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -91,7 +91,7 @@ const AddNewCampaign = () => {
     <div className="bg-gray-100">
       <Navbar />
       <Toaster />
-      {/* ✅ **ব্যানার সেকশন (গ্রেডিয়েন্ট যোগ করা হয়েছে)** */}
+      
       <div className="relative">
   <img
     src={img}

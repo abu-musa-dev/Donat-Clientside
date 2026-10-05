@@ -30,7 +30,7 @@ const Navbar = () => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser || null);
 
-      // ✅ Toast only when user logs in for the first time
+      // Toast only when user logs in for the first time
       if (currentUser && !loginToastShown) {
         toast.success("Logged in successfully!", { duration: 8000, position: "top-center" });
         setLoginToastShown(true);
